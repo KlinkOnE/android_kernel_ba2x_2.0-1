@@ -521,14 +521,6 @@ static void acpuclk_set_div(const struct clkctl_acpu_speed *hunt_s)
         /* CLK_SEL_SRC1NO */
         src_sel = reg_clksel & 1;
 
-        a11_div = hunt_s->a11clk_src_div;
-
-        if(hunt_s->a11clk_khz>800000) {
-                a11_div=0;
-                writel(hunt_s->a11clk_khz/19200, PLL4_L_VAL);
-                udelay(50);	
-        }
-
         /*
          * If the new clock divider is higher than the previous, then
          * program the divider before switching the clock
